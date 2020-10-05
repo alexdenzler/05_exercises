@@ -12,7 +12,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
 ```
 
 ```{r libraries}
@@ -84,10 +84,47 @@ Once your repository is created, you should always open your **project** rather 
 
   1. Choose 2 graphs you have created for ANY assignment in this class and add interactivity using the `ggplotly()` function.
   
+```{r}
+saleChartPlot <- saleChart %>% 
+  ggplot(aes(x = sales, y = reorder(title, sales), fill = country, color = artist)) + 
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = c("yellow", "pink", "turquoise3", "green", "red", "white", "gold")) + 
+  scale_color_manual(values = c("blue", "purple")) +
+  labs(title = "Sales by Album, Artist, and Country",
+       x = "Sales",
+       y = "Album",
+       fill = "Country",
+       color = "Artist",
+       caption = "Alex Denzler")
+
+garden_harvest_Lettuce <- garden_harvest %>% 
+  filter(vegetable == "lettuce") %>% 
+  ggplot(aes(y = fct_rev(fct_infreq(variety)))) + 
+  geom_bar(fill = "green4", color = "black") +
+  labs(title = "Frequency of Lettuce Harvest by Variety",
+       x = "Count",
+       y = "Variety")
+
+ggplotly(saleChartPlot)
+ggplotly(garden_harvest_Lettuce)
+```
+  
+  
   2. Use animation to tell an interesting story with the `small_trains` dataset that contains data from the SNCF (National Society of French Railways). These are Tidy Tuesday data! Read more about it [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-26).
 
 ```{r}
+small_trains_late <- small_trains %>% 
+  filter(delayed_number > .15) %>% 
+  mutate(prop_late = num_arriving_late/total_num_trips) %>% 
+  drop_na(service)
 
+small_trains_late %>% 
+  ggplot(aes(x = num_arriving_late, y = factor(month), fill = service)) + 
+  geom_violin() + 
+  labs(title = "Distribution of Late Arrivals",
+       x = "Number of Late Arrivals",
+       y = "Month",
+       fill = "Service Type")
 ```
 
 ## Garden data
@@ -97,6 +134,26 @@ Once your repository is created, you should always open your **project** rather 
   * Then, for each variety, find the cumulative harvest in pounds.  
   * Use the data you just made to create a static cumulative harvest area plot, with the areas filled with different colors for each vegetable and arranged (HINT: `fct_reorder()`) from most to least harvested (most on the bottom).  
   * Add animation to reveal the plot over date. 
+  
+```{r}
+garden_harvestT <- garden_harvest %>% 
+  group_by(variety) %>% 
+  filter(vegetable == "tomatoes") %>% 
+  summarize(mean_daily_harvest = mean(weight), cumWeight = sum(weight))
+
+tomato_plot <- garden_harvestT %>% 
+  ggplot(aes(x = cumWeight, y = mean_daily_harvest, fill = variety)) + 
+  geom_area(position = "stack") + 
+  labs(title = "Harvest Area Plot by Variety",
+       x = "Cumulative Weight",
+       y = "Mean Daily Harvest",
+       fill = "Variety")
+
+ggplotly(tomato_plot)
+```
+
+  
+  
 
 ## Maps, animation, and movement!
 

@@ -16,172 +16,20 @@ output:
 
 ```r
 library(tidyverse)     # for data cleaning and plotting
-```
-
-```
-## ── Attaching packages ─────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-```
-
-```
-## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-## ✓ tibble  3.0.3     ✓ dplyr   1.0.2
-## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-## ✓ readr   1.3.1     ✓ forcats 0.5.0
-```
-
-```
-## ── Conflicts ────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-```
-
-```r
 library(googlesheets4) # for reading googlesheet data
 library(lubridate)     # for date manipulation
-```
-
-```
-## 
-## Attaching package: 'lubridate'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     date, intersect, setdiff, union
-```
-
-```r
 library(openintro)     # for the abbr2state() function
-```
-
-```
-## Loading required package: airports
-```
-
-```
-## Loading required package: cherryblossom
-```
-
-```
-## Loading required package: usdata
-```
-
-```r
 library(palmerpenguins)# for Palmer penguin data
 library(maps)          # for map data
-```
-
-```
-## 
-## Attaching package: 'maps'
-```
-
-```
-## The following object is masked from 'package:purrr':
-## 
-##     map
-```
-
-```r
 library(ggmap)         # for mapping points on maps
-```
-
-```
-## Google's Terms of Service: https://cloud.google.com/maps-platform/terms/.
-```
-
-```
-## Please cite ggmap if you use it! See citation("ggmap") for details.
-```
-
-```r
 library(gplots)        # for col2hex() function
-```
-
-```
-## 
-## Attaching package: 'gplots'
-```
-
-```
-## The following object is masked from 'package:stats':
-## 
-##     lowess
-```
-
-```r
 library(RColorBrewer)  # for color palettes
 library(sf)            # for working with spatial data
-```
-
-```
-## Linking to GEOS 3.8.1, GDAL 3.1.1, PROJ 6.3.1
-```
-
-```r
 library(leaflet)       # for highly customizable mapping
 library(ggthemes)      # for more themes (including theme_map())
 library(plotly)        # for the ggplotly() - basic interactivity
-```
-
-```
-## 
-## Attaching package: 'plotly'
-```
-
-```
-## The following object is masked from 'package:ggmap':
-## 
-##     wind
-```
-
-```
-## The following object is masked from 'package:ggplot2':
-## 
-##     last_plot
-```
-
-```
-## The following object is masked from 'package:stats':
-## 
-##     filter
-```
-
-```
-## The following object is masked from 'package:graphics':
-## 
-##     layout
-```
-
-```r
 library(gganimate)     # for adding animation layers to ggplots
-```
-
-```
-## No renderer backend detected. gganimate will default to writing frames to separate files
-## Consider installing:
-## - the `gifski` package for gif output
-## - the `av` package for video output
-## and restarting the R session
-```
-
-```r
 library(transformr)    # for "tweening" (gganimate)
-```
-
-```
-## 
-## Attaching package: 'transformr'
-```
-
-```
-## The following object is masked from 'package:sf':
-## 
-##     st_normalize
-```
-
-```r
 library(shiny)         # for creating interactive apps
 gs4_deauth()           # To not have to authorize each time you knit.
 theme_set(theme_minimal())
@@ -191,133 +39,24 @@ theme_set(theme_minimal())
 ```r
 # SNCF Train data
 small_trains <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-26/small_trains.csv") 
-```
 
-```
-## Parsed with column specification:
-## cols(
-##   year = col_double(),
-##   month = col_double(),
-##   service = col_character(),
-##   departure_station = col_character(),
-##   arrival_station = col_character(),
-##   journey_time_avg = col_double(),
-##   total_num_trips = col_double(),
-##   avg_delay_all_departing = col_double(),
-##   avg_delay_all_arriving = col_double(),
-##   num_late_at_departure = col_double(),
-##   num_arriving_late = col_double(),
-##   delay_cause = col_character(),
-##   delayed_number = col_double()
-## )
-```
-
-```r
 # Lisa's garden data
 garden_harvest <- read_sheet("https://docs.google.com/spreadsheets/d/1DekSazCzKqPS2jnGhKue7tLxRU3GVL1oxi-4bEM5IWw/edit?usp=sharing") %>% 
   mutate(date = ymd(date))
-```
 
-```
-## Reading from "2020_harvest"
-```
-
-```
-## Range "Sheet1"
-```
-
-```r
 # Lisa's Mallorca cycling data
 mallorca_bike_day7 <- read_csv("https://www.dropbox.com/s/zc6jan4ltmjtvy0/mallorca_bike_day7.csv?dl=1") %>% 
   select(1:4, speed)
-```
 
-```
-## Parsed with column specification:
-## cols(
-##   lon = col_double(),
-##   lat = col_double(),
-##   ele = col_double(),
-##   time = col_datetime(format = ""),
-##   extensions = col_double(),
-##   ele.num = col_double(),
-##   date = col_date(format = ""),
-##   hrminsec = col_datetime(format = ""),
-##   time_hr = col_double(),
-##   dist_km = col_double(),
-##   speed = col_double()
-## )
-```
-
-```r
 # Heather Lendway's Ironman 70.3 Pan Am championships Panama data
 panama_swim <- read_csv("https://raw.githubusercontent.com/llendway/gps-data/master/data/panama_swim_20160131.csv")
-```
 
-```
-## Parsed with column specification:
-## cols(
-##   lon = col_double(),
-##   lat = col_double(),
-##   time = col_datetime(format = ""),
-##   extensions = col_double(),
-##   ele = col_logical(),
-##   event = col_character(),
-##   date = col_date(format = ""),
-##   hrminsec = col_datetime(format = "")
-## )
-```
-
-```r
 panama_bike <- read_csv("https://raw.githubusercontent.com/llendway/gps-data/master/data/panama_bike_20160131.csv")
-```
 
-```
-## Parsed with column specification:
-## cols(
-##   lon = col_double(),
-##   lat = col_double(),
-##   ele = col_double(),
-##   time = col_datetime(format = ""),
-##   extensions = col_double(),
-##   event = col_character(),
-##   date = col_date(format = ""),
-##   hrminsec = col_datetime(format = "")
-## )
-```
-
-```r
 panama_run <- read_csv("https://raw.githubusercontent.com/llendway/gps-data/master/data/panama_run_20160131.csv")
-```
 
-```
-## Parsed with column specification:
-## cols(
-##   lon = col_double(),
-##   lat = col_double(),
-##   ele = col_double(),
-##   time = col_datetime(format = ""),
-##   extensions = col_double(),
-##   event = col_character(),
-##   date = col_date(format = ""),
-##   hrminsec = col_datetime(format = "")
-## )
-```
-
-```r
 #COVID-19 data from the New York Times
 covid19 <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
-```
-
-```
-## Parsed with column specification:
-## cols(
-##   date = col_date(format = ""),
-##   state = col_character(),
-##   fips = col_character(),
-##   cases = col_double(),
-##   deaths = col_double()
-## )
 ```
 
 ## Put your homework on GitHub!
@@ -344,9 +83,68 @@ Once your repository is created, you should always open your **project** rather 
 
   1. Choose 2 graphs you have created for ANY assignment in this class and add interactivity using the `ggplotly()` function.
   
+
+```r
+saleChartPlot <- saleChart %>% 
+  ggplot(aes(x = sales, y = reorder(title, sales), fill = country, color = artist)) + 
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = c("yellow", "pink", "turquoise3", "green", "red", "white", "gold")) + 
+  scale_color_manual(values = c("blue", "purple")) +
+  labs(title = "Sales by Album, Artist, and Country",
+       x = "Sales",
+       y = "Album",
+       fill = "Country",
+       color = "Artist",
+       caption = "Alex Denzler")
+```
+
+```
+## Error in eval(lhs, parent, parent): object 'saleChart' not found
+```
+
+```r
+garden_harvest_Lettuce <- garden_harvest %>% 
+  filter(vegetable == "lettuce") %>% 
+  ggplot(aes(y = fct_rev(fct_infreq(variety)))) + 
+  geom_bar(fill = "green4", color = "black") +
+  labs(title = "Frequency of Lettuce Harvest by Variety",
+       x = "Count",
+       y = "Variety")
+
+ggplotly(saleChartPlot)
+```
+
+```
+## Error in ggplotly(saleChartPlot): object 'saleChartPlot' not found
+```
+
+```r
+ggplotly(garden_harvest_Lettuce)
+```
+
+<!--html_preserve--><div id="htmlwidget-fe4a1567fcdeb2c174a7" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fe4a1567fcdeb2c174a7">{"x":{"data":[{"orientation":"v","width":[1,3,9,27,28],"base":[0.55,1.55,2.55,3.55,4.55],"x":[0.5,1.5,4.5,13.5,14],"y":[0.9,0.9,0.9,0.9,0.9],"text":["count:  1<br />fct_rev(fct_infreq(variety)): 0.9","count:  3<br />fct_rev(fct_infreq(variety)): 0.9","count:  9<br />fct_rev(fct_infreq(variety)): 0.9","count: 27<br />fct_rev(fct_infreq(variety)): 0.9","count: 28<br />fct_rev(fct_infreq(variety)): 0.9"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(0,139,0,1)","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":148.310502283105},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Frequency of Lettuce Harvest by Variety","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.4,29.4],"tickmode":"array","ticktext":["0","10","20"],"tickvals":[0,10,20],"categoryorder":"array","categoryarray":["0","10","20"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,5.6],"tickmode":"array","ticktext":["mustard greens","reseed","Tatsoi","Farmer's Market Blend","Lettuce Mixture"],"tickvals":[1,2,3,4,5],"categoryorder":"array","categoryarray":["mustard greens","reseed","Tatsoi","Farmer's Market Blend","Lettuce Mixture"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Variety","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"5da647d4845d":{"y":{},"type":"bar"}},"cur_data":"5da647d4845d","visdat":{"5da647d4845d":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+  
+  
   2. Use animation to tell an interesting story with the `small_trains` dataset that contains data from the SNCF (National Society of French Railways). These are Tidy Tuesday data! Read more about it [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-26).
 
 
+```r
+small_trains_late <- small_trains %>% 
+  filter(delayed_number > .15) %>% 
+  mutate(prop_late = num_arriving_late/total_num_trips) %>% 
+  drop_na(service)
+
+small_trains_late %>% 
+  ggplot(aes(x = num_arriving_late, y = factor(month), fill = service)) + 
+  geom_violin() + 
+  labs(title = "Distribution of Late Arrivals",
+       x = "Number of Late Arrivals",
+       y = "Month",
+       fill = "Service Type")
+```
+
+![](05_exercises_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 ## Garden data
 
@@ -355,6 +153,30 @@ Once your repository is created, you should always open your **project** rather 
   * Then, for each variety, find the cumulative harvest in pounds.  
   * Use the data you just made to create a static cumulative harvest area plot, with the areas filled with different colors for each vegetable and arranged (HINT: `fct_reorder()`) from most to least harvested (most on the bottom).  
   * Add animation to reveal the plot over date. 
+  
+
+```r
+garden_harvestT <- garden_harvest %>% 
+  group_by(variety) %>% 
+  filter(vegetable == "tomatoes") %>% 
+  summarize(mean_daily_harvest = mean(weight), cumWeight = sum(weight))
+
+tomato_plot <- garden_harvestT %>% 
+  ggplot(aes(x = cumWeight, y = mean_daily_harvest, fill = variety)) + 
+  geom_area(position = "stack") + 
+  labs(title = "Harvest Area Plot by Variety",
+       x = "Cumulative Weight",
+       y = "Mean Daily Harvest",
+       fill = "Variety")
+
+ggplotly(tomato_plot)
+```
+
+<!--html_preserve--><div id="htmlwidget-0a7a1823d869326e8de1" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0a7a1823d869326e8de1">{"x":{"data":[{"x":[23722,23722,23722,23722],"y":[0,0,948.88,0],"text":"cumWeight: 23722<br />mean_daily_harvest: 948.8800<br />variety: Amish Paste","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(248,118,109,1)","hoveron":"points","name":"Amish Paste","legendgroup":"Amish Paste","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[13760,13760,13760],"y":[0,688,0],"text":"cumWeight: 13760<br />mean_daily_harvest: 688.0000<br />variety: Better Boy","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(222,140,0,1)","hoveron":"points","name":"Better Boy","legendgroup":"Better Boy","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[9958,9958,9958],"y":[0,553.222222222222,0],"text":"cumWeight:  9958<br />mean_daily_harvest: 553.2222<br />variety: Big Beef","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(183,159,0,1)","hoveron":"points","name":"Big Beef","legendgroup":"Big Beef","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6795,6795,6795],"y":[0,617.727272727273,0],"text":"cumWeight:  6795<br />mean_daily_harvest: 617.7273<br />variety: Black Krim","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(124,174,0,1)","hoveron":"points","name":"Black Krim","legendgroup":"Black Krim","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[10919,10919,10919],"y":[0,419.961538461538,0],"text":"cumWeight: 10919<br />mean_daily_harvest: 419.9615<br />variety: Bonny Best","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,186,56,1)","hoveron":"points","name":"Bonny Best","legendgroup":"Bonny Best","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6679,6679,6679],"y":[0,445.266666666667,0],"text":"cumWeight:  6679<br />mean_daily_harvest: 445.2667<br />variety: Brandywine","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,192,139,1)","hoveron":"points","name":"Brandywine","legendgroup":"Brandywine","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6908,6908,6908],"y":[0,531.384615384615,0],"text":"cumWeight:  6908<br />mean_daily_harvest: 531.3846<br />variety: Cherokee Purple","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,191,196,1)","hoveron":"points","name":"Cherokee Purple","legendgroup":"Cherokee Purple","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[12639,12639,12639],"y":[0,341.594594594595,0],"text":"cumWeight: 12639<br />mean_daily_harvest: 341.5946<br />variety: grape","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,180,240,1)","hoveron":"points","name":"grape","legendgroup":"grape","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6469,6469,6469],"y":[0,539.083333333333,0],"text":"cumWeight:  6469<br />mean_daily_harvest: 539.0833<br />variety: Jet Star","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(97,156,255,1)","hoveron":"points","name":"Jet Star","legendgroup":"Jet Star","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[10088,10088,10088],"y":[0,776,0],"text":"cumWeight: 10088<br />mean_daily_harvest: 776.0000<br />variety: Mortgage Lifter","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(199,124,255,1)","hoveron":"points","name":"Mortgage Lifter","legendgroup":"Mortgage Lifter","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[10374,10374,10374],"y":[0,648.375,0],"text":"cumWeight: 10374<br />mean_daily_harvest: 648.3750<br />variety: Old German","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(245,100,227,1)","hoveron":"points","name":"Old German","legendgroup":"Old German","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18232,18232,18232],"y":[0,701.230769230769,0],"text":"cumWeight: 18232<br />mean_daily_harvest: 701.2308<br />variety: volunteers","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(255,100,176,1)","hoveron":"points","name":"volunteers","legendgroup":"volunteers","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":43.1050228310502},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Harvest Area Plot by Variety","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[5606.35,24584.65],"tickmode":"array","ticktext":["10000","15000","20000"],"tickvals":[10000,15000,20000],"categoryorder":"array","categoryarray":["10000","15000","20000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Cumulative Weight","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-47.444,996.324],"tickmode":"array","ticktext":["0","250","500","750"],"tickvals":[0,250,500,750],"categoryorder":"array","categoryarray":["0","250","500","750"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Mean Daily Harvest","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.913385826771654},"annotations":[{"text":"Variety","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"5da6149b7ee1":{"x":{},"y":{},"fill":{},"type":"scatter"}},"cur_data":"5da6149b7ee1","visdat":{"5da6149b7ee1":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+
+  
+  
 
 ## Maps, animation, and movement!
 
