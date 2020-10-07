@@ -140,10 +140,11 @@ small_trains_late %>%
 garden_harvestT <- garden_harvest %>% 
   filter(vegetable == "tomatoes") %>% 
   group_by(variety, date) %>% 
-  summarize(daily_harvest = sum(weight)) %>% 
+  summarize(daily_harvest = sum(weight)*0.00220462) %>% 
   mutate(day_of_week = wday(date, label = TRUE)) %>% 
   ungroup() %>% 
-  mutate(variety = fct_reorder(variety, daily_harvest, sum, .desc = TRUE), cumHarv = cumsum(daily_harvest)) 
+  mutate(variety = fct_reorder(variety, daily_harvest, sum, .desc = TRUE), 
+         cumHarv = cumsum(daily_harvest)) 
 
 garden_harvestT %>% 
   ggplot(aes(x = date, y = cumHarv, fill = variety)) + 
